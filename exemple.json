@@ -1,0 +1,56 @@
+{
+  "kind": "youtube#playlistItem",
+  "etag": "OEeN33jiih51veNRZwHtpgeEbq0",
+  "id": "UExIaVo0bTh2Q3A5T2tyVVJ1ZkhwR1VVVEJqSmhPOUdoeS43ODA2MDVCQzY5QzZDMjUw",
+  "snippet": {
+    "publishedAt": "2021-12-17T20:38:48Z",
+    "channelId": "UCFM3gG5IHfogarxlKcIHCAg",
+    "title": "#100 JavaScript Bangla Tutorial | DOM Project JavaScript Tutorial",
+    "description": "In this tutorial, I have shown a complete project on HTML DOM (Document Object Model). This is a very important video for any beginner who is following this JavaScript series. If you watch this video carefully and understand how I used JavaScript to manipulate the DOM, you will understand the foundation of front-end web development.\n\n👍 GitHub Repository Link - https://github.com/learnwithsumit/hack-programming-hero\n👍 Full Playlist Link - https://lwsbd.link/startjs\n\nIf you don't have basic knowledge on Git & GitHub, you can check this beginner friendly Git tutorial from here - https://lwsbd.link/git\n\n\nReferences:\n\n👍 VS Code Live Server Plugin - https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer\n👍 Programming Hero Open API  URL - http://openapi.programming-hero.com/api/course/curriculum\n👍 DOM Video Tutorials - https://lwsbd.link/playdom\n👍 DOM Advanced Playlist - https://lwsbd.link/dom\n👍 Array Methods - https://www.youtube.com/watch?v=Oi0o0ORl_u0&list=PLHiZ4m8vCp9OkrURufHpGUUTBjJhO9Ghy\n👍 JSON Editor Online - https://jsoneditoronline.org\n👍 JSON Tutorial - https://www.youtube.com/watch?v=-sh1ESgihPM\n\n\n\nকোন প্রশ্ন থাকলে comment section এ comment করতে পারেন। সেই সাথে আমাদের একটি Facebook Group আছে। সেখানেও আপনার প্রশ্ন করতে পারেন। সব প্রয়োজনীয় link নিচে দেয়া হলো - \n\n👍 Facebook Group - https://www.facebook.com/groups/learnwithsumit\n👍 Like our Facebook Page - https://www.facebook.com/LetsLearnwithSumit\n👍 Follow our GitHub Profile - https://github.com/learnwithsumit\n👍 Follow us at Instagram - https://www.instagram.com/learnwithsumit\n👍 Follow me at - https://www.facebook.com/sumit.analyzen\n👍 Learn with Sumit Official VS Code Theme - https://lwsbd.link/vst\n\n#learnwithsumit",
+    "thumbnails": {
+      "default": {
+        "url": "https://i.ytimg.com/vi/_WuDDnZMRiE/default.jpg",
+        "width": 120,
+        "height": 90
+      },
+      "medium": {
+        "url": "https://i.ytimg.com/vi/_WuDDnZMRiE/mqdefault.jpg",
+        "width": 320,
+        "height": 180
+      },
+      "high": {
+        "url": "https://i.ytimg.com/vi/_WuDDnZMRiE/hqdefault.jpg",
+        "width": 480,
+        "height": 360
+      },
+      "standard": {
+        "url": "https://i.ytimg.com/vi/_WuDDnZMRiE/sddefault.jpg",
+        "width": 640,
+        "height": 480
+      },
+      "maxres": {
+        "url": "https://i.ytimg.com/vi/_WuDDnZMRiE/maxresdefault.jpg",
+        "width": 1280,
+        "height": 720
+      }
+    },
+    "channelTitle": "Learn with Sumit - LWS - Bangladesh",
+    "playlistId": "PLHiZ4m8vCp9OkrURufHpGUUTBjJhO9Ghy",
+    "position": 100,
+    "resourceId": {
+      "kind": "youtube#video",
+      "videoId": "_WuDDnZMRiE"
+    },
+    "videoOwnerChannelTitle": "Learn with Sumit - LWS - Bangladesh",
+    "videoOwnerChannelId": "UCFM3gG5IHfogarxlKcIHCAg"
+  },
+  "contentDetails": {
+    "videoId": "_WuDDnZMRiE",
+    "videoPublishedAt": "2021-12-18T08:30:57Z"
+  },
+  "status": {
+    "privacyStatus": "public"
+  }
+}
+
+
