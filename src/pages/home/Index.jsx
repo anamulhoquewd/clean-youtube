@@ -18,74 +18,32 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import Forward10Icon from "@mui/icons-material/Forward10";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import { red } from "@mui/material/colors";
-import { Button, Link } from "@mui/material";
+import { Button, Grid, Link } from "@mui/material";
 import NavBar from "../../components/nav-bar/Index";
 import MyDrawer from "../../components/drawer/Index";
+import VideoCard from "../../components/video-card/Index";
+import { useStoreState } from "easy-peasy";
+import { CircularProgress } from "@mui/material";
+import DemoCard from "../../components/video-card/Demo";
 
 const Home = () => {
   const [open, setOpen] = React.useState(false);
-
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-
   const handleDrawerClose = () => {
     setOpen(false);
   };
 
+  //   const { playlistId } = useParams();
+  let playlists = useStoreState((state) => state.playlists);
+
+  let playlist;
+  if (playlists !== null) playlist = Object.values(playlists.data);
+
   return (
     <Box sx={{ display: "flex" }}>
       <NavBar open={open} />
-
-      {/* <Drawer
-        onMouseOver={handleDrawerOpen}
-        onMouseOut={handleDrawerClose}
-        variant="permanent"
-        open={open}
-      >
-        <List>
-          {["Home", "Playlists", "Favorites", "Recents", "Add Playlist"].map(
-            (text, index) => (
-              <ListItem
-                key={Math.random() * index}
-                disablePadding
-                sx={{ display: "block" }}
-              >
-                <ListItemButton
-                  onClick={(e) => console.log(e.target)}
-                  sx={{
-                    minHeight: 48,
-                    justifyContent: open ? "initial" : "center",
-                    px: 2.5,
-                  }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : "auto",
-                      justifyContent: "center",
-                    }}
-                  >
-                    {index === 0 ? (
-                      <HomeIcon />
-                    ) : index === 1 ? (
-                      <PlaylistPlayIcon />
-                    ) : index === 2 ? (
-                      <FavoriteIcon />
-                    ) : index === 3 ? (
-                      <Forward10Icon />
-                    ) : (
-                      <AddCircleIcon />
-                    )}
-                  </ListItemIcon>
-                  <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-                </ListItemButton>
-              </ListItem>
-            )
-          )}
-        </List>
-        <Divider />
-      </Drawer> */}
 
       <MyDrawer
         open={open}
@@ -94,20 +52,31 @@ const Home = () => {
       />
 
       <Box component="main" sx={{ flexGrow: 1, p: 3, mt: 10 }}>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-          ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-          elementum integer enim neque volutpat ac tincidunt. Ornare suspendisse
-          sed nisi lacus sed viverra tellus. Purus sit amet volutpat consequat
-          mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis
-          risus sed vulputate odio. Morbi tincidunt ornare massa eget egestas
-          purus viverra accumsan in. In hendrerit gravida rutrum quisque non
-          tellus orci ac. Pellentesque nec nam aliquam sem et tortor. Habitant
-          morbi tristique senectus et. Adipiscing elit duis tristique
-          sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
+        {playlist.length === 0 ? (
+          <DemoCard />
+        ) : (
+          <Grid
+            container
+            spacing={{ xs: 2 }}
+            columns={{ xs: 12, sm: 12, md: 12, lg: 12 }}
+          >
+            {playlist.map((item) => (
+              <Grid
+                display={"flex"}
+                flexWrap={"wrap"}
+                key={item.playlistId}
+                item
+                xs={12}
+                sm={6}
+                md={4}
+                lg={3}
+                xl={2}
+              >
+                <VideoCard playlist={item} />
+              </Grid>
+            ))}
+          </Grid>
+        )}
       </Box>
     </Box>
   );

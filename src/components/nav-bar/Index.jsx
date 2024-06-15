@@ -17,8 +17,6 @@ const NavBar = ({ open }) => {
     setFormOpen(false);
   };
 
-  
-
   return (
     <AppBar
       sx={{

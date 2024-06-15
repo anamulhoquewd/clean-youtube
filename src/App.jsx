@@ -3,12 +3,17 @@ import { CssBaseline, createTheme } from "@mui/material";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import storage from "./util/storage";
 import Home from "./pages/home/Index";
+import { useEffect } from "react";
+import {
+  BrowserRouter,
+  Route,
+  Router,
+  Routes,
+  useParams,
+} from "react-router-dom";
+import NotFound from "./pages/error/Index";
 
-const SESSION_KEY = "MY_SESSION_STORAGE_KEY";
 const App = () => {
-  const data = storage.get(SESSION_KEY);
-  console.log(data);
-
   const darkTheme = createTheme({
     palette: {
       mode: "dark",
@@ -17,7 +22,13 @@ const App = () => {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <Home />
+
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
     </ThemeProvider>
   );
 };
