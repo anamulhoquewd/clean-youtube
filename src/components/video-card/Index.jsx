@@ -1,55 +1,163 @@
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import { useStoreState } from "easy-peasy";
-import { Link, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { CardActionArea, IconButton } from "@mui/material";
-import { FavoriteBorder, FavoriteOutlined } from "@mui/icons-material";
+import { useStoreActions, useStoreState } from "easy-peasy";
+import { useState } from "react";
+import { Link } from "@reach/router";
 
-export default function VideoCard({ playlist }) {
-  const [hasFavorite, setHasFavorite] = useState(false);
+import {
+  ButtonGroup,
+  CardActionArea,
+  DialogContentText,
+  IconButton,
+  DialogTitle,
+  Tooltip,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Button,
+  Typography,
+  Dialog,
+  DialogActions,
+  DialogContent,
+} from "@mui/material";
 
-  const { playlistThumbnail, playlistTitle, channelTitle } = playlist;
+import {
+  FavoriteBorder,
+  FavoriteOutlined,
+  DeleteSweep,
+} from "@mui/icons-material";
+
+const VideoCard = ({ playlist, outsite = false }) => {
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const playlists = useStoreActions((actions) => actions.playlists);
+  const favorites = useStoreActions((actions) => actions.favorites);
+  const recents = useStoreActions(actions => actions.recents);
+
+  const favorite = useStoreState((states) => states.favorites);
+
+  const { playlistThumbnail, playlistTitle, channelTitle, playlistId } =
+    playlist;
+
+  const hasFavorite = favorite.items.includes(playlistId);
+
+
 
   return (
-    <Card sx={{ maxWidth: 345, display: "flex", flexDirection: "column" }}>
-      <Link to={`playlist/list?${playlist.playlistId}`}>
+    <Card
+      sx={{
+        maxWidth: 345,
+        // width: playlistThumbnail.width,
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        boxShadow: "none",
+        borderBottom: "1px solid rgba(0, 0, 0, 0.1)",
+      }}
+    >
+      <Link to={`playlist/list?${playlistId}`}>
         <CardActionArea>
           <CardMedia
             sx={{
-              height: playlistThumbnail.height,
-              width: playlistThumbnail.width,
+              height: outsite ? 110 : playlistThumbnail.height - 20, // 180
+              // width: playlistThumbnail.width, // 320
+              width: "100%",
             }}
             image={playlistThumbnail.url}
             title={playlistTitle}
+            onClick={() => recents.addItem(playlistId)}
           />
         </CardActionArea>
       </Link>
 
       <CardContent sx={{ flexGrow: 1 }}>
         <Typography gutterBottom variant="body1">
-          {playlistTitle}
+          {outsite
+            ? playlistTitle.length > 35
+              ? playlistTitle.slice(0, 35) + "..."
+              : playlistTitle
+            : playlistTitle}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {channelTitle}
-        </Typography>
+        {!outsite && (
+          <Typography
+            sx={{ flexGrow: 1 }}
+            variant="body2"
+            color="text.secondary"
+          >
+            {channelTitle}
+          </Typography>
+        )}
       </CardContent>
 
-      <CardActions>
-        <Link to={`playlist/list?${playlist.playlistId}`}>
-          <Button variant="outlined" size="small">
-            Start Playlist
+      <CardActions
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Link to={`playlist/list?${playlistId}`}>
+          <Button
+            variant="outlined"
+            size="small"
+            onClick={() => recents.addItem(playlistId)}
+          >
+            {outsite ? "GO" : "Start Playlist"}
           </Button>
         </Link>
-
-        <IconButton aria-label="add to favorites">
-          {hasFavorite ? <FavoriteOutlined /> : <FavoriteBorder />}
-        </IconButton>
+        <ButtonGroup>
+          <Tooltip title={hasFavorite ? "Unfavorite" : "Favorite"}>
+            <IconButton
+              aria-label="add to favorites"
+              onClick={() => {
+                hasFavorite
+                  ? favorites.removeItem(playlistId)
+                  : favorites.addItem(playlistId);
+              }}
+            >
+              {hasFavorite ? <FavoriteOutlined /> : <FavoriteBorder />}
+            </IconButton>
+          </Tooltip>
+          {!outsite && (
+            <Tooltip title="Delete">
+              <IconButton aria-label="delete item" onClick={handleClickOpen}>
+                <DeleteSweep />
+              </IconButton>
+            </Tooltip>
+          )}
+        </ButtonGroup>
       </CardActions>
+
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Delete Remainder</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to delete?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>No</Button>
+          <Button
+            onClick={() => {
+              playlists.removeItem(playlistId);
+              favorites.removeItem(playlistId);
+              handleClickOpen();
+              handleClose();
+            }}
+          >
+            yes
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Card>
   );
-}
+};
+
+export default VideoCard;

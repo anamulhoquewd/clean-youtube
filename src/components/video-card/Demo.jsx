@@ -1,6 +1,7 @@
-import { Box, Button, Typography } from "@mui/material";
-import Form from "../form/Index";
 import { useState } from "react";
+import { Box, Typography } from "@mui/material";
+
+import Form from "../form";
 
 const DemoCard = () => {
   const [openForm, setFormOpen] = useState(false);
@@ -12,12 +13,18 @@ const DemoCard = () => {
   };
 
   return (
-    <Box>
-      <Typography sx={{ textAlign: "center" }}>
-      There is No playlists
+    <Box
+      display={"flex"}
+      justifyContent={"center"}
+      alignItems={"center"}
+      height={"75vh"}
+    >
+      <Typography sx={{ textAlign: "center" }} variant="h6">
+        There is No playlists
         <Typography
-          sx={{ color: "palegreen", cursor: "pointer" }}
+          sx={{ cursor: "pointer", textDecoration: "underline" }}
           onClick={handleClickOpen}
+          variant="h6"
         >
           Create one.
         </Typography>

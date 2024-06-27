@@ -11,7 +11,7 @@ const playlistModel = persist({
   }),
 
   getItem: thunk(async ({ addItem }, playlistId, { getState }) => {
-    if (getState().data[playlistId]) return;
+    if (getState().data[playlistId]) return; // error throw korbo
 
     try {
       const playlist = await getPlaylist(playlistId);
@@ -19,6 +19,10 @@ const playlistModel = persist({
     } catch (e) {
       console.log(e?.response?.data?.error?.message || "Sumthin went wrong!");
     }
+  }),
+
+  removeItem: action(({ data }, payload) => {
+    delete data[payload];
   }),
 });
 

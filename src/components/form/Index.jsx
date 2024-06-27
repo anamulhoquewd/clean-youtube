@@ -17,9 +17,8 @@ const Form = ({ handleClose, open }) => {
 
   const playlists = useStoreActions((actions) => actions.playlists);
 
-  const playlistsState = useStoreState((state) => state.playlists);
-
-  storage.set(SESSION_KEY, playlistsState.data);
+  // const playlistsState = useStoreState((state) => state.playlists);
+  // storage.set(SESSION_KEY, playlistsState.data);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -74,7 +73,7 @@ const Form = ({ handleClose, open }) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
-        <Button type="submit">Subscribe</Button>
+        <Button type="submit">Add Playlist</Button>
       </DialogActions>
     </Dialog>
   );

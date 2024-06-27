@@ -1,36 +1,59 @@
-import { ThemeProvider } from "@emotion/react";
-import { CssBaseline, createTheme } from "@mui/material";
-import { useStoreActions, useStoreState } from "easy-peasy";
-import storage from "./util/storage";
-import Home from "./pages/home/Index";
-import { useEffect } from "react";
-import {
-  BrowserRouter,
-  Route,
-  Router,
-  Routes,
-  useParams,
-} from "react-router-dom";
-import NotFound from "./pages/error/Index";
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider, createTheme } from "@mui/material";
+import Playlists from "./pages/playlists";
+import { useState } from "react";
+import NotFound from "./pages/error";
+import NavBer from "./components/nav-bar";
+import Favorites from "./pages/favorites";
+import Recents from "./pages/recents";
+import { Router } from "@reach/router";
 
-const App = () => {
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-end",
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+}));
+
+ const  App = ()=> {
+  const [themes, setThemes] = useState(true);
+
+  const handleThemes = () => {
+    setThemes(!themes);
+  };
+
   const darkTheme = createTheme({
     palette: {
-      mode: "dark",
+      mode: themes ? "dark" : "light",
+      bgAppBerDefault: themes ? "#272727" : "#fff",
+      drawerTextDefault: themes ? "#fff" : "#707070",
     },
   });
+
   return (
     <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
+      <Box sx={{ display: "flex" }}>
+        <CssBaseline />
 
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+        <NavBer handleThemes={handleThemes} />
+
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <DrawerHeader />
+          <Router>
+            <Playlists path="/" />
+            <Playlists path="/playlists" />
+            <Favorites path="/favorites" />
+            <Recents path="/recents" />
+            <NotFound path="*" />
+          </Router>
+        </Box>
+      </Box>
     </ThemeProvider>
   );
-};
+}
 
-export default App;
+export default  App
