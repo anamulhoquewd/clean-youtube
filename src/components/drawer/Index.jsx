@@ -133,9 +133,9 @@ export default function MyDrawer({ handleDrawerClose, open }) {
         <List>
           {[
             {
-              text: "Playlists",
-              icon: <PlaylistPlayIcon />,
-              link: "playlists",
+              text: "Home",
+              icon: <HomeIcon />,
+              link: "/",
             },
             {
               text: "Favorites",

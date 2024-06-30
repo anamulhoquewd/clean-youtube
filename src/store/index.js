@@ -4,6 +4,7 @@ import favoriteModel from "./favoriteStore";
 import recentModel from "./recentsStore";
 
 const store = createStore({
+  darkMode: true,
   playlists: playlistModel,
   favorites: favoriteModel,
   recents: recentModel,

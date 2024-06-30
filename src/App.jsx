@@ -9,6 +9,7 @@ import NavBer from "./components/nav-bar";
 import Favorites from "./pages/favorites";
 import Recents from "./pages/recents";
 import { Router } from "@reach/router";
+import Videos from "./pages/videos/";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -45,9 +46,10 @@ const DrawerHeader = styled("div")(({ theme }) => ({
           <DrawerHeader />
           <Router>
             <Playlists path="/" />
-            <Playlists path="/playlists" />
             <Favorites path="/favorites" />
             <Recents path="/recents" />
+            <Videos path="/playlist/:playlistId" />
+            
             <NotFound path="*" />
           </Router>
         </Box>

@@ -4,7 +4,7 @@ import getPlaylist from "../api";
 const playlistModel = persist({
   data: {},
   error: "",
-  loading: false,
+  loading: false, // need Skeleton
 
   addItem: action(({ data }, payload) => {
     data[payload.playlistId] = payload;

@@ -4,7 +4,6 @@ import { useStoreState } from "easy-peasy";
 import DemoCard from "../../components/video-card/demo";
 
 const Playlists = () => {
-  //   const { playlistId } = useParams();
   const playlists = useStoreState((state) => state.playlists);
 
   let playlist;

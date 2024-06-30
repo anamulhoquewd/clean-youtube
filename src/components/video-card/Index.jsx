@@ -1,6 +1,6 @@
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { useState } from "react";
-import { Link } from "@reach/router";
+// import { Link } from "@reach/router";
 
 import {
   ButtonGroup,
@@ -18,6 +18,7 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
+  Link,
 } from "@mui/material";
 
 import {
@@ -39,7 +40,7 @@ const VideoCard = ({ playlist, outsite = false }) => {
 
   const playlists = useStoreActions((actions) => actions.playlists);
   const favorites = useStoreActions((actions) => actions.favorites);
-  const recents = useStoreActions(actions => actions.recents);
+  const recents = useStoreActions((actions) => actions.recents);
 
   const favorite = useStoreState((states) => states.favorites);
 
@@ -47,8 +48,6 @@ const VideoCard = ({ playlist, outsite = false }) => {
     playlist;
 
   const hasFavorite = favorite.items.includes(playlistId);
-
-
 
   return (
     <Card
@@ -62,20 +61,18 @@ const VideoCard = ({ playlist, outsite = false }) => {
         borderBottom: "1px solid rgba(0, 0, 0, 0.1)",
       }}
     >
-      <Link to={`playlist/list?${playlistId}`}>
-        <CardActionArea>
-          <CardMedia
-            sx={{
-              height: outsite ? 110 : playlistThumbnail.height - 20, // 180
-              // width: playlistThumbnail.width, // 320
-              width: "100%",
-            }}
-            image={playlistThumbnail.url}
-            title={playlistTitle}
-            onClick={() => recents.addItem(playlistId)}
-          />
-        </CardActionArea>
-      </Link>
+      <CardActionArea href={`playlist/${playlistId}`}>
+        <CardMedia
+          sx={{
+            height: outsite ? 110 : playlistThumbnail.height - 20, // 180
+            // width: playlistThumbnail.width, // 320
+            width: "100%",
+          }}
+          image={playlistThumbnail.url}
+          title={playlistTitle}
+          onClick={() => recents.addItem(playlistId)}
+        />
+      </CardActionArea>
 
       <CardContent sx={{ flexGrow: 1 }}>
         <Typography gutterBottom variant="body1">
@@ -103,7 +100,7 @@ const VideoCard = ({ playlist, outsite = false }) => {
           alignItems: "center",
         }}
       >
-        <Link to={`playlist/list?${playlistId}`}>
+        <Link href={`playlist/${playlistId}`}>
           <Button
             variant="outlined"
             size="small"

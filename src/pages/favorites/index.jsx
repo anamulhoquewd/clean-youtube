@@ -3,13 +3,10 @@ import VideoCard from "../../components/video-card";
 import { useStoreState } from "easy-peasy";
 
 const Favorites = () => {
-  //   const { playlistId } = useParams();
   const playlists = useStoreState((state) => state.playlists);
   const favorites = useStoreState((state) => state.favorites);
 
-  let playlist;
-  if (playlists !== null)
-    playlist = favorites.items.map((item) => playlists.data[item]);
+  const playlist = favorites.items.map((item) => playlists.data[item]);
 
   return (
     <Box sx={{ display: "flex" }}>
