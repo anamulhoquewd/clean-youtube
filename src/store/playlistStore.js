@@ -4,20 +4,34 @@ import getPlaylist from "../api";
 const playlistModel = persist({
   data: {},
   error: "",
-  loading: false, // need Skeleton
+  isLoading: false, 
 
   addItem: action(({ data }, payload) => {
     data[payload.playlistId] = payload;
   }),
 
-  getItem: thunk(async ({ addItem }, playlistId, { getState }) => {
-    if (getState().data[playlistId]) return; // error throw korbo
+  setLoading: action((state, payload) => {
+    state.isLoading = payload;
+  }),
+  setError: action((state, payload) => {
+    state.error = payload;
+  }),
+
+  getItem: thunk(async (state, playlistId, { getState }) => {
+    if (getState().data[playlistId]) return; 
+
+    state.setLoading(true);
 
     try {
       const playlist = await getPlaylist(playlistId);
-      addItem(playlist);
+      state.addItem(playlist);
     } catch (e) {
-      console.log(e?.response?.data?.error?.message || "Sumthin went wrong!");
+      console.log(e.response?.data?.error?.message || "Sumthin went wrong!");
+      state.setError(
+        e.response?.data?.error?.message || "Something went wrong"
+      );
+    } finally {
+      state.setLoading(false);
     }
   }),
 

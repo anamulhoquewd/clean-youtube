@@ -7,6 +7,7 @@ const Recents = () => {
   const recents = useStoreState((state) => state.recents);
 
   const playlist = recents.items.map((item) => playlists.data[item]);
+  console.log(playlist)
 
   return (
     <Box sx={{ display: "flex" }}>

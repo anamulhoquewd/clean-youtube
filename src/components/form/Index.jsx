@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -7,10 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { FormHelperText } from "@mui/material";
-import { useStoreActions, useStoreState } from "easy-peasy";
-import storage from "../../util/storage";
-
-const SESSION_KEY = "MY_SESSION_STORAGE_KEY";
+import { useStoreActions } from "easy-peasy";
 
 const Form = ({ handleClose, open }) => {
   const [value, setValue] = useState("");

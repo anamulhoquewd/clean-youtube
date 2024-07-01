@@ -1,4 +1,4 @@
-import { Grid, Box } from "@mui/material";
+import { Grid, Box, } from "@mui/material";
 import VideoCard from "../../components/video-card";
 import { useStoreState } from "easy-peasy";
 import DemoCard from "../../components/video-card/demo";

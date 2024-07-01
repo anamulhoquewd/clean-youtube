@@ -1,4 +1,4 @@
-import { useParams } from "@reach/router";
+import { Link, useParams } from "@reach/router";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -71,33 +71,45 @@ const Videos = () => {
 
       <Box sx={{ pl: 60 }}>
         {playlist.playlistItems.map((item, index) => (
-          <Card key={item.contentDetails.videoId} sx={{ mb: 1.5 }}>
-            <CardActionArea
-              sx={{
-                display: "flex",
-                gap: 3,
-                justifyContent: "start",
-                alignItems: "center",
-              }}
-              href={`wacth/${item.contentDetails.videoId}`}
+          <Card
+            key={item.contentDetails.videoId}
+            sx={{ mb: 1.5, boxShadow: "none" }}
+          >
+            <Link
+              to={`wacth/${item.contentDetails.videoId}`}
+              style={{ textDecoration: "none" }}
             >
-              <Typography ml={2}>{index + 1}</Typography>
-              <CardMedia
-                component="img"
-                image={item.thumbnail.url}
-                alt="Video item"
+              <CardActionArea
                 sx={{
-                  width: item.thumbnail.width,
-                  height: item.thumbnail.height,
+                  display: "flex",
+                  gap: 3,
+                  justifyContent: "start",
+                  alignItems: "center",
                 }}
-              />
-              <CardContent>
-                <Typography gutterBottom>{item.title}</Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {playlist.channelTitle}
+                // href={`/wacth/${item.contentDetails.videoId}`}
+              >
+                <Typography ml={2} color="text.primary">
+                  {index + 1}
                 </Typography>
-              </CardContent>
-            </CardActionArea>
+                <CardMedia
+                  component="img"
+                  image={item.thumbnail.url}
+                  alt="Video item"
+                  sx={{
+                    width: item.thumbnail.width,
+                    height: item.thumbnail.height,
+                  }}
+                />
+                <CardContent>
+                  <Typography gutterBottom color="text.primary">
+                    {item.title}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {playlist.channelTitle}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Link>
           </Card>
         ))}
         <Divider />
