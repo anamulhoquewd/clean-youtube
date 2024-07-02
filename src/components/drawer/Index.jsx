@@ -1,28 +1,23 @@
+import { useState } from "react";
 import { styled, useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
+import { Link } from "@reach/router";
+
 import MuiDrawer from "@mui/material/Drawer";
-import MuiAppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
 import List from "@mui/material/List";
-import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
-import GitHubIcon from "@mui/icons-material/GitHub";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import HomeIcon from "@mui/icons-material/Home";
+
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import Forward10Icon from "@mui/icons-material/Forward10";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { Link } from "@reach/router";
-import { useState } from "react";
+import HomeIcon from "@mui/icons-material/Home";
+import Forward10Icon from "@mui/icons-material/Forward10";
+
 import Form from "../form";
 
 const drawerWidth = 200;
