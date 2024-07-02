@@ -19,12 +19,11 @@ const DemoCard = () => {
       alignItems={"center"}
       height={"75vh"}
     >
-      <Typography sx={{ textAlign: "center" }} variant="h6">
+      <Typography sx={{ textAlign: "center" }} >
         There is No playlists
         <Typography
           sx={{ cursor: "pointer", textDecoration: "underline" }}
           onClick={handleClickOpen}
-          variant="h6"
         >
           Create one.
         </Typography>
