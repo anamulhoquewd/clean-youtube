@@ -14,7 +14,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <SidebarProvider
       defaultOpen={false}
       style={{
-        "--sidebar-width": "14rem",
+        ["--sidebar-width" as string]: "14rem",
       }}
     >
       <AppSidebar />

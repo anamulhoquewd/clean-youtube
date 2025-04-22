@@ -14,9 +14,10 @@ import { Plus } from "lucide-react";
 import AddPlaylistForm from "../form/add-playlist";
 import usePlaylist from "@/hooks/use-playlist";
 import { useStoreState } from "easy-peasy";
+import { CreateStore } from "@/types/store";
 
 function AddPlaylist() {
-  const loading = useStoreState((states) => states.playlists).loading;
+  const loading = useStoreState((states: CreateStore) => states.playlists).loading;
   const { isOpen, setIsOpen, form, onSubmit } = usePlaylist();
 
   return (

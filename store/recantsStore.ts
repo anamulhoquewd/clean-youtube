@@ -1,6 +1,7 @@
+import { RecantModel } from "@/types/recant";
 import { action, persist } from "easy-peasy";
 
-const recentModel = persist({
+const recentModel = persist<RecantModel>({
   items: [],
 
   addItem: action(({ items }, payload) => {

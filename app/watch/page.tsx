@@ -1,15 +1,17 @@
 "use client";
 
+import { Suspense } from "react";
 import Videos from "@/components/videos";
+import { CreateStore } from "@/types/store";
 import { useStoreState } from "easy-peasy";
 import { useSearchParams } from "next/navigation";
 
 function Page() {
   const v = useSearchParams().get("v");
-  const list = useSearchParams().get("list");
+  const list = useSearchParams().get("list") as string;
   const index = useSearchParams().get("index");
 
-  const playlistsState = useStoreState((state) => state.playlists);
+  const playlistsState = useStoreState((state: CreateStore) => state.playlists);
 
   const playlists = playlistsState.data[list];
 
@@ -37,4 +39,10 @@ function Page() {
   );
 }
 
-export default Page;
+export default function WrappedPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Page />
+    </Suspense>
+  );
+}

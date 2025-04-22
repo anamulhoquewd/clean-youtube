@@ -1,16 +1,16 @@
 "use client";
 
 import CartList from "@/components/cart-list";
+import { CreateStore } from "@/types/store";
 import { useStoreState } from "easy-peasy";
 
 function Page() {
-  const playlistsState = useStoreState((state) => state.playlists);
-  const favoritesState = useStoreState((state) => state.favorites);
+  const playlistsState = useStoreState((state: CreateStore) => state.playlists);
+  const favoritesState = useStoreState((state: CreateStore) => state.favorites);
 
   const playlists = favoritesState.items.map(
     (item) => playlistsState.data[item]
   );
-  console.log("Playlists: ", playlists);
 
   return (
     <div className="flex flex-1 flex-col gap-4 px-2 mt-4">

@@ -21,18 +21,17 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
+import { CreateStore } from "@/types/store";
 
-interface PlaylistCardProps {
+interface Props {
   id: string;
   title: string;
+  thumbnail: {
+    url: string;
+  };
   videoCount: number;
   videosId: string;
   position: number;
-  thumbnail: {
-    url: string;
-    width: number;
-    height: number;
-  };
 }
 
 export function PlaylistCard({
@@ -41,17 +40,22 @@ export function PlaylistCard({
   thumbnail,
   videoCount,
   videosId,
-  playlist,
   position,
-}: PlaylistCardProps) {
-  const favoritesAction = useStoreActions((actions) => actions.favorites);
-  const playlistsAction = useStoreActions((actions) => actions.playlists);
-  const recantsAction = useStoreActions((actions) => actions.recants);
-  const favoritesState = useStoreState((states) => states.favorites);
+}: Props) {
+  const favoritesAction = useStoreActions(
+    (actions: CreateStore) => actions.favorites
+  );
+  const playlistsAction = useStoreActions(
+    (actions: CreateStore) => actions.playlists
+  );
+  const recantsAction = useStoreActions(
+    (actions: CreateStore) => actions.recants
+  );
+  const favoritesState = useStoreState(
+    (states: CreateStore) => states.favorites
+  );
 
   const hasFavorite = favoritesState.items.includes(id);
-
-  console.log("Playlist: ", playlist);
 
   return (
     <div className={"group flex flex-col"}>
@@ -59,7 +63,7 @@ export function PlaylistCard({
         <Link
           href={`/watch?v=${videosId}&list=${id}&index=${position}`}
           className="block"
-          onClick={() => recantsAction.addItem(id)}
+          onClick={() => (recantsAction.addItem as any)(id)}
         >
           <Image
             src={thumbnail.url || ""}
@@ -100,9 +104,9 @@ export function PlaylistCard({
                 </AlertDialogCancel>
                 <AlertDialogAction
                   onClick={() => {
-                    playlistsAction.removeItem(id);
-                    favoritesAction.removeItem(id);
-                    recantsAction.removeItem(id);
+                    (playlistsAction.removeItem as any)(id);
+                    (favoritesAction.removeItem as any)(id);
+                    (recantsAction.removeItem as any)(id);
                   }}
                   className="bg-red-600 hover:bg-red-700 cursor-pointer"
                 >
@@ -123,8 +127,8 @@ export function PlaylistCard({
                   size="icon"
                   onClick={() => {
                     hasFavorite
-                      ? favoritesAction.removeItem(id)
-                      : favoritesAction.addItem(id);
+                      ? (favoritesAction.removeItem as any)(id)
+                      : (favoritesAction.addItem as any)(id);
                   }}
                 >
                   <Heart
@@ -161,7 +165,7 @@ export function PlaylistCard({
         <Link
           href={`/watch?v=${videosId}&list=${id}&index=${position}`}
           className="mt-1 text-sm text-muted-foreground hover:text-primary w-fit"
-          onClick={() => recantsAction.addItem(id)}
+          onClick={() => (recantsAction.addItem as any)(id)}
         >
           View full playlist
         </Link>

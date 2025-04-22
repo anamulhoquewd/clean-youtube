@@ -1,6 +1,7 @@
+import { FavoriteModel } from "@/types/favorite";
 import { action, persist } from "easy-peasy";
 
-const favoriteModel = persist({
+const favoriteModel = persist<FavoriteModel>({
   items: [],
 
   addItem: action(({ items }, payload) => {

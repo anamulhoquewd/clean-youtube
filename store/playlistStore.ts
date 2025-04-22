@@ -1,9 +1,9 @@
 import getPlaylist from "@/api";
+import { PlaylistModel } from "@/types/playlist";
 import { action, persist, thunk } from "easy-peasy";
 
-const playlistModel = persist({
+const playlistModel = persist<PlaylistModel>({
   data: {},
-  error: "",
   loading: false,
 
   addItem: action(({ data }, payload) => {
@@ -12,9 +12,6 @@ const playlistModel = persist({
 
   setLoading: action((state, payload) => {
     state.loading = payload;
-  }),
-  setError: action((state, payload) => {
-    state.error = payload;
   }),
 
   getItem: thunk(async (state, playlistId, { getState }) => {
@@ -26,11 +23,8 @@ const playlistModel = persist({
     try {
       const playlist = await getPlaylist(playlistId);
       state.addItem(playlist);
-    } catch (e) {
+    } catch (e: any) {
       console.log(e.response?.data?.error?.message || "Something went wrong!");
-      state.setError(
-        e.response?.data?.error?.message || "Something went wrong"
-      );
     } finally {
       state.setLoading(false);
     }
